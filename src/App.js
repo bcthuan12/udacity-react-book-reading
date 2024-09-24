@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 
-function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
+const App = () => {
+  const [showSearchPage, setShowSearchPage] = useState(false);
 
   return (
     <div className="app">
@@ -11,7 +11,7 @@ function App() {
           <div className="search-books-bar">
             <a
               className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
+              onClick={() => setShowSearchPage(!showSearchPage)}
             >
               Close
             </a>
@@ -273,12 +273,12 @@ function App() {
             </div>
           </div>
           <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+            <a onClick={() => setShowSearchPage(!showSearchPage)}>Add a book</a>
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default App;
