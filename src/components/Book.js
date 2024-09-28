@@ -1,4 +1,4 @@
-const Book = ({ book }) => {
+const Book = ({ book, changeShelf }) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -11,7 +11,7 @@ const Book = ({ book }) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <select>
+          <select onClick={(event) => changeShelf(book, event.target.value)}>
             <option value="none" disabled>
               Move to...
             </option>
@@ -24,7 +24,7 @@ const Book = ({ book }) => {
       </div>
       <div className="book-title">{book.title}</div>
       <div className="book-authors">
-        {book.author ? book.author.join(",") : ""}
+        {book.authors ? book.authors.join(",") : ""}
       </div>
     </div>
   );

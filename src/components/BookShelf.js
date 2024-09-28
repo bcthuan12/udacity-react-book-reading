@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
 import Book from "./Book.js";
-import {getAll} from "../BooksApi.js"
+import { update } from "../BooksApi.js";
 
-const BookShelf = ({ title, type }) => {
-  const [books, setBooks] = useState([]);
+const BookShelf = ({ title, books, refreshOtherShelf }) => {
+  const changeShelf = (book, newShelf) => {
+    if (book.shelf === newShelf) {
+      return;
+    }
+    update(book, newShelf).then(() => {
+      refreshOtherShelf();
+    });
+  };
 
-  useEffect(() => {
-    getAll()
-    .then(bookApis => {
-      console.log(bookApis);
-      setBooks(bookApis.filter(b => b.shelf === type));
-    })
-  }, []);
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{title}</h2>
@@ -20,9 +19,7 @@ const BookShelf = ({ title, type }) => {
           {books.map((book) => {
             return (
               <li key={book.id}>
-                <Book
-                  book={book}
-                ></Book>
+                <Book book={book} changeShelf={changeShelf}></Book>
               </li>
             );
           })}
