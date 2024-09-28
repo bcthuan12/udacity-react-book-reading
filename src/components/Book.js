@@ -1,4 +1,4 @@
-const Book = ({ image, title, author }) => {
+const Book = ({ book }) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -7,7 +7,7 @@ const Book = ({ image, title, author }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${image})`,
+            backgroundImage: `url(${book.imageLinks.thumbnail})`,
           }}
         ></div>
         <div className="book-shelf-changer">
@@ -22,8 +22,10 @@ const Book = ({ image, title, author }) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{title}</div>
-      <div className="book-authors">{author}</div>
+      <div className="book-title">{book.title}</div>
+      <div className="book-authors">
+        {book.author ? book.author.join(",") : ""}
+      </div>
     </div>
   );
 };
