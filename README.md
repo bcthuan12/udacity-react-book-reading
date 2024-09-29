@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# MyReads Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About :
+
+This is a single-page app (navigation happens without the need to refresh pages),
+and it represents a virtual bookcase to store your books and track what you're reading.
+MyReads lets you manage your digital bookshelf.
+
+## It supports three shelves:
+
+- Currently Reading.
+- Want to Read.
+- Read.
 
 ## Available Scripts
 
