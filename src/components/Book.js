@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Book = ({ book, changeShelf, isOnShelf }) => {
   const getCover = (book) => {
@@ -12,6 +12,10 @@ const Book = ({ book, changeShelf, isOnShelf }) => {
     setShelf(shelf);
     changeShelf(book, shelf);
   }
+
+  useEffect(() => {
+    setShelf(book.shelf);
+  }, []);
 
   return (
     <div className="book">

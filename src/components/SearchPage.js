@@ -6,6 +6,7 @@ import Book from "./Book";
 const SearchPage = () => {
   const [books, setBooks] = useState([]);
   const [booksOnShelf, setBooksOnShelf] = useState([]);
+
   useEffect(() => {
     getAll().then((bookApis) => {
       setBooksOnShelf([...bookApis]);
@@ -13,7 +14,11 @@ const SearchPage = () => {
   }, []);
 
   const isBookOnShelf = (book) => {
-    return booksOnShelf.filter((b) => b.id === book.id)?.length;
+    const bookOnShelf = booksOnShelf.find((b) => b.id === book.id);
+    if (bookOnShelf && !Object.hasOwn(book, 'shelf')) {
+      book.shelf = bookOnShelf.shelf;
+    }
+    return bookOnShelf;
   };
 
   const searchBook = (event) => {
