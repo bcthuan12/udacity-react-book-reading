@@ -1,9 +1,18 @@
+import { useState } from "react";
+
 const Book = ({ book, changeShelf, isOnShelf }) => {
   const getCover = (book) => {
     return book?.imageLinks?.thumbnail
       ? book?.imageLinks?.thumbnail
       : "No image";
   };
+  const [shelf, setShelf] = useState('none');
+
+  const moveShelf = (shelf) => {
+    setShelf(shelf);
+    changeShelf(book, shelf);
+  }
+
   return (
     <div className="book">
       <div className="book-top">
@@ -17,24 +26,16 @@ const Book = ({ book, changeShelf, isOnShelf }) => {
         ></div>
         <div className="book-shelf-changer">
           <select
-            onChangeCapture={(event) => changeShelf(book, event.target.value)}
+            onChange={(event) => moveShelf(event.target.value)}
+            value={shelf}
           >
-            <option value="none" disabled>
+            <option disabled>
               {isOnShelf ? "Move to..." : "Add to..."}
             </option>
-            <option
-              value="currentlyReading"
-              selected={book.shelf === "currentlyReading"}
-            >
-              Currently Reading
-            </option>
-            <option value="wantToRead" selected={book.shelf === "wantToRead"}>
-              Want to Read
-            </option>
-            <option value="read" selected={book.shelf === "read"}>
-              Read
-            </option>
-            {isOnShelf ? <option value="none">None</option> : ""}
+            <option value="currentlyReading">Currently Reading</option>
+            <option value="wantToRead">Want to Read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
           </select>
         </div>
       </div>
