@@ -19,7 +19,11 @@ const BookShelf = ({ title, books, refreshOtherShelf }) => {
           {books.map((book) => {
             return (
               <li key={book.id}>
-                <Book book={book} changeShelf={changeShelf}></Book>
+                <Book
+                  book={book}
+                  changeShelf={changeShelf}
+                  isOnShelf={true}
+                ></Book>
               </li>
             );
           })}

@@ -1,13 +1,28 @@
 import { Link } from "react-router-dom";
-import { search, update } from "../services/BooksApi";
-import { useState } from "react";
+import { getAll, search, update } from "../services/BooksApi";
+import { useEffect, useState } from "react";
 import Book from "./Book";
 
 const SearchPage = () => {
   const [books, setBooks] = useState([]);
+  const [booksOnShelf, setBooksOnShelf] = useState([]);
+  useEffect(() => {
+    getAll().then((bookApis) => {
+      setBooksOnShelf([...bookApis]);
+    });
+  }, []);
+
+  const isBookOnShelf = (book) => {
+    return booksOnShelf.filter((b) => b.id === book.id)?.length;
+  };
+
   const searchBook = (event) => {
-    search(event.target.value, 50).then((books) => {
-      setBooks([...books]);
+    search(event.target.value, 50).then((res) => {
+      if (res && !res?.error) {
+        setBooks([...res]);
+      } else {
+        setBooks([...[]]);
+      }
     });
   };
 
@@ -17,6 +32,9 @@ const SearchPage = () => {
     }
     update(book, newShelf).then(() => {
       alert(`${book.title} is move to ${newShelf}`);
+      getAll().then((bookApis) => {
+        setBooksOnShelf([...bookApis]);
+      });
     });
   };
 
@@ -39,7 +57,11 @@ const SearchPage = () => {
           {books.map((book) => {
             return (
               <li key={book.id}>
-                <Book book={book} changeShelf={moveToShelf}></Book>
+                <Book
+                  book={book}
+                  changeShelf={moveToShelf}
+                  isOnShelf={isBookOnShelf(book)}
+                ></Book>
               </li>
             );
           })}
