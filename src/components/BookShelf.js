@@ -1,5 +1,5 @@
 import Book from "./Book.js";
-import { update } from "../BooksApi.js";
+import { update } from "../services/BooksApi.js";
 
 const BookShelf = ({ title, books, refreshOtherShelf }) => {
   const changeShelf = (book, newShelf) => {

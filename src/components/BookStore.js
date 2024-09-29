@@ -1,7 +1,7 @@
 import BookShelf from "./BookShelf";
 import { useEffect, useState } from "react";
-import { getAll } from "../BooksApi";
 import { Link } from "react-router-dom";
+import { getAll } from "../services/BooksApi";
 
 const BookStore = () => {
   const [read, setRead] = useState([]);
