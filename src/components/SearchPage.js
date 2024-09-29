@@ -31,7 +31,6 @@ const SearchPage = () => {
       return;
     }
     update(book, newShelf).then(() => {
-      alert(`${book.title} is move to ${newShelf}`);
       getAll().then((bookApis) => {
         setBooksOnShelf([...bookApis]);
       });
