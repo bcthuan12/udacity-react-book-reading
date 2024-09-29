@@ -18,6 +18,7 @@ const Book = ({ book, changeShelf, isOnShelf }) => {
         <div className="book-shelf-changer">
           {isOnShelf ? (
             <select
+              value={book.shelf}
               onChangeCapture={(event) => changeShelf(book, event.target.value)}
             >
               <option value="none" disabled>
