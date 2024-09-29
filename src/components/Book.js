@@ -16,31 +16,26 @@ const Book = ({ book, changeShelf, isOnShelf }) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          {isOnShelf ? (
-            <select
-              value={book.shelf}
-              onChangeCapture={(event) => changeShelf(book, event.target.value)}
+          <select
+            onChangeCapture={(event) => changeShelf(book, event.target.value)}
+          >
+            <option value="none" disabled>
+              {isOnShelf ? "Move to..." : "Add to..."}
+            </option>
+            <option
+              value="currentlyReading"
+              selected={book.shelf === "currentlyReading"}
             >
-              <option value="none" disabled>
-                Move to...
-              </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          ) : (
-            <select
-              onChangeCapture={(event) => changeShelf(book, event.target.value)}
-            >
-              <option value="none" disabled>
-                Add to...
-              </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-            </select>
-          )}
+              Currently Reading
+            </option>
+            <option value="wantToRead" selected={book.shelf === "wantToRead"}>
+              Want to Read
+            </option>
+            <option value="read" selected={book.shelf === "read"}>
+              Read
+            </option>
+            {isOnShelf ? <option value="none">None</option> : ""}
+          </select>
         </div>
       </div>
       <div className="book-title">{book.title}</div>
